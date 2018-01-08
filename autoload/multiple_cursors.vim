@@ -639,7 +639,7 @@ function! s:CursorManager.initialize() dict
   let self.saved_settings['lazyredraw'] = &lazyredraw
   let self.saved_settings['paste'] = &paste
   let self.saved_settings['clipboard'] = &clipboard
-  let &virtualedit = "onemore"
+  let &virtualedit = get(g:, 'multi_cursor_virtual_mode', "onemore")
   let &cursorline = 0
   let &lazyredraw = 1
   let &paste = 0
@@ -749,7 +749,7 @@ let s:cm = s:CursorManager.new()
 " is the line number, second element is the column number
 function! s:pos(mark)
   let pos = getpos(a:mark)
-  return [pos[1], pos[2]]
+  return [pos[1], pos[2]+pos[3]]
 endfunction
 
 " Return the region covered by the input markers as a two element array. First
